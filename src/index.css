@@ -1,0 +1,38 @@
+@import url("https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Mono:ital,wght@0,200..800;1,200..800&family=Audiowide&display=swap");
+@import "tailwindcss";
+@import "tailwind-scrollbar-hide/v4";
+@plugin 'tailwind-scrollbar' {
+  nocompatible: true;
+  preferredstrategy: "pseudoelements";
+}
+
+@utility scrollbar-medium {
+  &::-webkit-scrollbar-track {
+    display: hidden;
+    background: #85f1f1;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: #3629e9;
+  }
+  &::-webkit-scrollbar-thumb:hover {
+    background: #6459f2;
+  }
+
+  scrollbar-width: thin;
+  scrollbar-color: #3629e9 #85f1f1;
+}
+
+@theme {
+  --font-hyperlegible-mono: "Atkinson Hyperlegible Mono", mono;
+  --font-audiowide: "Audiowide", cursive;
+  --animate-reverse-spin: reverse-spin 1s ease-in-out infinite;
+
+  @keyframes reverse-spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(-360deg);
+    }
+  }
+}
