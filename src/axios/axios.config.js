@@ -4,7 +4,7 @@ import authService from "./auth.js";
 import store from "../store/store.js";
 
 const instance = axios.create({
-  baseURL: "https://chat-app-backend-bnbt.onrender.com",
+  baseURL: "https://chat-app-backend-bnbt.onrender.com/api/v1",
   headers: {
     "X-Client-Version": "1.0.0",
     "X-Platform": "web",
