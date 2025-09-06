@@ -19,6 +19,7 @@ import {
   removeMessageEventsListener,
 } from "../../config/webSocket";
 import { setUserProfileData } from "../../store/userSlice";
+import { set } from "react-hook-form";
 
 function ChatList() {
   const activeFriendIds = useSelector((state) => state.user.activeFriendIds);
@@ -131,26 +132,18 @@ function ChatList() {
         if (newUserData) dispatch(setUserProfileData(newUserData));
       }
       else if (activeFriendDataRef.current[0].roomId !== newMessageRoomId) {
-        let newMessageRoom;
-        const updatedActiveFriendData = activeFriendDataRef.current.filter(
-          (friend) => {
-            if (friend.roomId === newMessageRoomId) {
-              newMessageRoom = friend;
-              return false;
-            }
-            return true;
+        const updatedActiveFriendData = activeFriendDataRef.current.reduce((acc, friend) => {
+          if(friend.roomId === newMessageRoomId){
+            acc.unshift({...friend});
           }
-        );
-        if (newMessageRoom) {
-          newMessageRoom = {
-            ...newMessageRoom,
-          };
-          setActiveFriendData([newMessageRoom, ...updatedActiveFriendData]);
-          activeFriendDataRef.current = [
-            newMessageRoom,
-            ...updatedActiveFriendData,
-          ];
-        }
+          else{
+            acc.push(friend);
+          }
+          return acc;
+        }, []);
+
+        setActiveFriendData(updatedActiveFriendData);
+        activeFriendDataRef.current = updatedActiveFriendData;
       }
     };
 
