@@ -26,6 +26,7 @@ function ChatListContainer({
   const [showProfile, setShowProfile] = useState(false);
   const currRoomId = useSelector((state) => state.chat.roomId);
   const currRoomIdRef = useRef(currRoomId);
+  const containerRoomIdRef = useRef(roomId);
   const lastMessageAtByUser = useSelector((state) => state.chat.lastMessageAt);
   const dispatch = useDispatch();
   const [newFriendMessages, setNewFriendMessages] = useState(newMessages);
@@ -36,12 +37,16 @@ function ChatListContainer({
   useClickOutside(ref, () => setShowProfile(false));
 
   useEffect(() => {
+    containerRoomIdRef.current = roomId;
+  }, [roomId]);
+
+  useEffect(() => {
     currRoomIdRef.current = currRoomId;
   }, [currRoomId]);
 
   useEffect(() => {
     const listener = (data) => {
-      if (data.roomId === roomId && data.roomId !== currRoomIdRef.current) {
+      if (data.roomId === containerRoomIdRef.current && data.roomId !== currRoomIdRef.current) {
         setNewFriendMessages((prev) => prev + 1);
         setLastMessageAtTime(
           new Date(data.updatedAt).toLocaleTimeString("en-IN", {
@@ -208,7 +213,9 @@ function ChatListContainer({
         </div>
         {type === "active" && (
           <div className="flex justify-between items-center">
-            <p className="ml-2 max-w-40 xl:max-w-50 overflow-hidden text-nowrap truncate text-sm text-gray-400">{lastMessage}</p>
+            <p className="ml-2 max-w-40 xl:max-w-50 overflow-hidden text-nowrap truncate text-sm text-gray-400">
+              {lastMessage}
+            </p>
             {type === "active" &&
               currRoomId !== roomId &&
               newFriendMessages > 0 && (
