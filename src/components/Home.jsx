@@ -13,7 +13,22 @@ function Home() {
             <ChatList />
           </div>
           <div className="w-3/4 bg-[#077dc1] rounded-t-xl overflow-hidden">
-            {roomId ? <Chat /> : <h1>Select a chat</h1>}
+            {roomId ? (
+              <Chat />
+            ) : (
+              <div className="flex flex-col w-2/3 h-full justify-center items-center m-auto space-y-2 font-hyperlegible-mono text-xl text-shadow-sm text-shadow-gray-500">
+                <Logo width="w-50" />
+                <div>Want to add new friends</div>
+                <div className="text-center space-y-2">
+                  Just tap the &nbsp;
+                  <i className="fa-solid fa-plus text-xl"></i>&nbsp; icon, then
+                  hit the &nbsp;
+                  <i className="fa-solid fa-user-plus text-2xl"></i>&nbsp;
+                  profile button, <br />
+                  and type their name into the search bar.
+                </div>
+              </div>
+            )}
           </div>
         </Container>
       ) : (

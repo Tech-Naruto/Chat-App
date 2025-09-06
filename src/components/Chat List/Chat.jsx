@@ -10,6 +10,7 @@ import MyEmojiPicker from "./Emoji";
 import useClickOutside from "../../hooks/useClickOutside";
 import { socket } from "../../config/webSocket";
 import { AnimatePresence } from "motion/react";
+import { useEffect } from "react";
 
 function Chat() {
   const roomId = useSelector((state) => state.chat.roomId);
@@ -34,6 +35,7 @@ function Chat() {
   const emojiButtonRef = useRef(null);
   const [showEmoji, setShowEmoji] = useState(false);
   const messageMapRef = useRef({});
+  const [loading, setLoading] = useState(false);
 
   useClickOutside(emojiRef, (event) => {
     if (
@@ -43,13 +45,25 @@ function Chat() {
       setShowEmoji(false);
   });
 
+  useEffect(() => {
+    if(messages.length > 0){
+      setMessages([]);
+    }
+  }, [roomId]);
+
   const addNewActiveFriend = async () => {
+    if(loading) return;
+    const timeout = setTimeout(() => setLoading(true), 100);
     try {
       const newUserData = await contactService.addToActiveFriends({
         friendName,
       });
       if (newUserData) dispatch(setUserProfileData(newUserData));
+      clearTimeout(timeout);
+      setLoading(false);
     } catch (err) {
+      clearTimeout(timeout);
+      setLoading(false);
       console.log(err);
     }
   };
@@ -146,6 +160,7 @@ function Chat() {
           <div>
             <Button
               text="Add"
+              loading={loading}
               className="bg-[#077dc1] justify-self-end hover:bg-[#84d9ec]"
               icon={"fa-solid fa-user-plus"}
               onClick={async () => {

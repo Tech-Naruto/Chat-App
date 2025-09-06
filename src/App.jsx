@@ -7,23 +7,31 @@ import { setUserProfileData } from "./store/userSlice";
 import { motion } from "motion/react";
 import { useLocation } from "react-router-dom";
 import { webSocketConfig } from "./config/webSocket";
+import { contactService } from "./components";
 
 function App() {
   const dispatch = useDispatch();
   const location = useLocation();
   const userStatus = useSelector((state) => state.auth.status);
-  const userData = useSelector((state) => state.auth.userData);
   const userStatusRef = useRef(userStatus);
 
   useEffect(() => {
     userStatusRef.current = userStatus;
-    if(!userStatus) return;
+    if (!userStatus) return;
 
     let socket;
+    const init = async () => {
+      try {
+        const userData = await contactService.getUserDetails();
+        dispatch(setUserProfileData(userData));
+        socket = webSocketConfig(userStatusRef);
+      } catch (error) {
+        console.log(error);
+      }
+    };
 
-    if(userStatus){
-      socket = webSocketConfig(userStatusRef);
-      dispatch(setUserProfileData(userData));
+    if (userStatus) {
+      init();
     }
 
     return () => {
