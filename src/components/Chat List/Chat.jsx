@@ -172,10 +172,10 @@ function Chat() {
               icon={"fa-solid fa-user-plus"}
               onClick={async () => {
                 try {
+                  const timeout = setTimeout(() => setLoading(true), 100);
                   const newUserData = await contactService.addToContactFriends({
                     friendName,
                   });
-                  const timeout = setTimeout(() => setLoading(true), 100);
                   if (newUserData) {
                     clearTimeout(timeout);
                     setLoading(false);
