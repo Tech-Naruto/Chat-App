@@ -51,6 +51,14 @@ function Chat() {
     }
   }, [roomId]);
 
+  const handleEnterKey = (e) => {
+    if(e.key === "Enter" && !e.shiftKey){
+      e.preventDefault();
+      setShowEmoji(false);
+      handleSubmit(onSend)();
+    }
+  }
+
   const addNewActiveFriend = async () => {
     if(loading) return;
     const timeout = setTimeout(() => setLoading(true), 100);
@@ -147,7 +155,7 @@ function Chat() {
   };
 
   return (
-    <div className="flex flex-col h-full relative">
+    <div className="flex flex-col h-full relative" onKeyDown={showEmoji ? handleEnterKey : null}>
       <div className="w-full flex bg-gray-700 items-center space-x-5 p-2">
         <img
           src={friendProfilePic}
