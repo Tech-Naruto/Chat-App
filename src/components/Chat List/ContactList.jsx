@@ -9,7 +9,7 @@ function ContactList({ contactFriendData }) {
             exit={{ opacity: 0}}
             className="h-full overflow-y-hidden"
           >
-            <ul className="flex flex-col space-y-2 h-full overflow-y-scroll">
+            <ul className="flex flex-col space-y-2 h-full overflow-y-auto scrollbar-medium">
               {contactFriendData.map((friend) => (
                 <li key={friend._id} className="relative z-0 ">
                   <ChatListContainer
