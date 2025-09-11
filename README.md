@@ -1,12 +1,72 @@
-# React + Vite
+# Chat App Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A minimal, emotionally resonant chat interface built with precision and purpose. Designed for real-time reliability, pixel-perfect UI, and seamless cross-device performance.
 
-Currently, two official plugins are available:
+[🔗 Live Demo](https://chat-app-delta-henna-92.vercel.app)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+[Click to watch](https://github.com/Tech-Naruto/User-Attachments/blob/main/videos/Chat%20App%20Demo.mp4)
 
-## Expanding the ESLint configuration
+## 🧩 Overview
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+This is a real-time chat application frontend designed for speed, reliability, and emotional resonance. Key features include:
+
+- **Authentication Flows**
+
+  - Login and SignUp
+  - Secure logout across devices
+
+- **Live Messaging**
+
+  - Real-time message delivery via WebSocket
+  - Latest messages appear at the top
+  - Message count indicators for each thread
+
+- **Presence Indicators**
+
+  - Online status tracking using Redis expiry keys
+  - Heartbeat mechanism for accurate presence updates
+
+- **Animations & UX**
+
+  - Smooth transitions powered by Framer Motion
+
+- **Backend Integration Highlights**
+
+  - WebSocket for real-time communication
+  - Redis pub/sub for fast data access and decoupled presence logic
+  - Expiry keys to offload presence tracking from the database
+
+## 🚀 Features
+
+- Edit your profile details and avatar
+- Add and search friends from contacts
+- Discover new users with smart suggestions
+- Chat with emoji-rich messages
+- Real-time updates with online status indicators
+
+## 🛠 Tech Stack
+
+| Layer            | Tools & Libraries                            |
+| ---------------- | -------------------------------------------- |
+| Build Tool       | Vite (lightning-fast dev + optimized builds) |
+| UI Framework     | React, Tailwind CSS                          |
+| Animation        | Framer Motion                                |
+| State Management | Redux with persistent store                  |
+| Data Fetching    | Axios                                        |
+| Real-Time Comm   | WebSocket (frontend)                         |
+| Backend Support  | Redis (pub/sub, expiry keys for presence)    |
+
+## 🔒 Security
+
+- Tokens are validated at runtime for format and expiration to ensure safe authentication.
+- Passwords are securely hashed using `bcrypt` before storage.
+- Messages are encrypted with Node.js `crypto` for added privacy.
+- Session data is cleared on logout to prevent leaks across devices.
+
+## 🧭 Final Notes
+
+This project blends real-time architecture with emotionally resonant design.  
+Built for reliability, clarity, and connection—across devices, browsers, and moments.  
+Feel free to explore, or just enjoy the experience.
+
+— Krish Vardhan Pal
