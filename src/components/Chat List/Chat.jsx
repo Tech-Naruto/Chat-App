@@ -46,32 +46,28 @@ function Chat() {
   });
 
   useEffect(() => {
-    if(messages.length > 0){
+    if (messages.length > 0) {
       setMessages([]);
     }
   }, [roomId]);
 
   const handleEnterKey = (e) => {
-    if(e.key === "Enter" && !e.shiftKey){
+    if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
       setShowEmoji(false);
       handleSubmit(onSend)();
     }
-  }
+  };
 
   const addNewActiveFriend = async () => {
-    if(loading) return;
-    const timeout = setTimeout(() => setLoading(true), 100);
+    if (loading) return;
+
     try {
       const newUserData = await contactService.addToActiveFriends({
         friendName,
       });
       if (newUserData) dispatch(setUserProfileData(newUserData));
-      clearTimeout(timeout);
-      setLoading(false);
     } catch (err) {
-      clearTimeout(timeout);
-      setLoading(false);
       console.log(err);
     }
   };
@@ -155,7 +151,10 @@ function Chat() {
   };
 
   return (
-    <div className="flex flex-col h-full relative" onKeyDown={showEmoji ? handleEnterKey : null}>
+    <div
+      className="flex flex-col h-full relative"
+      onKeyDown={showEmoji ? handleEnterKey : null}
+    >
       <div className="w-full flex bg-gray-700 items-center space-x-5 p-2">
         <img
           src={friendProfilePic}
@@ -176,9 +175,15 @@ function Chat() {
                   const newUserData = await contactService.addToContactFriends({
                     friendName,
                   });
-                  console.log("newUserData", newUserData);
+                  const timeout = setTimeout(() => setLoading(true), 100);
+                  if (newUserData) {
+                    clearTimeout(timeout);
+                    setLoading(false);
+                  }
                   dispatch(setUserProfileData(newUserData));
                 } catch (err) {
+                  clearTimeout(timeout);
+                  setLoading(false);
                   console.log(err);
                 }
               }}
