@@ -46,7 +46,10 @@ function ChatListContainer({
 
   useEffect(() => {
     const listener = (data) => {
-      if (data.roomId === containerRoomIdRef.current && data.roomId !== currRoomIdRef.current) {
+      if (
+        data.roomId === containerRoomIdRef.current &&
+        data.roomId !== currRoomIdRef.current
+      ) {
         setNewFriendMessages((prev) => prev + 1);
         setLastMessageAtTime(
           new Date(data.updatedAt).toLocaleTimeString("en-IN", {
@@ -72,14 +75,18 @@ function ChatListContainer({
 
   const [updatePrevIsPresent, cancelDebounce1] = useDebouncedCallback(
     async ({ prevRoomFriendName, friendName, isPresent }) => {
-      if (prevRoomFriendName && prevRoomFriendName !== friendName) {
-        await messageService.updateIsPresent({
-          friendName: prevRoomFriendName,
-          isPresent,
-        });
+      try {
+        if (prevRoomFriendName && prevRoomFriendName !== "" && prevRoomFriendName !== friendName) {
+          await messageService.updateIsPresent({
+            friendName: prevRoomFriendName,
+            isPresent,
+          });
+        }
+      } catch (error) {
+        console.log(error);
       }
     },
-    3000
+    type === "active" ? 3000 : 0
   );
 
   const [updateCurrIsPresent, cancelDebounce2] = useDebouncedCallback(
@@ -90,7 +97,7 @@ function ChatListContainer({
         console.log(error);
       }
     },
-    3000
+    type === "active" ? 3000 : 0
   );
 
   useEffect(() => {

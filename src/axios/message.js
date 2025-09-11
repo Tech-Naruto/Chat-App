@@ -1,7 +1,6 @@
 import axios from "./axios.config.js";
 
 export class MessageService {
-
   async postMessage({ friendName, message, file }) {
     return axios
       .post(
@@ -34,11 +33,14 @@ export class MessageService {
   }
 
   async deleteMessage({ messageId }) {
-    return axios.delete(`/messages/${messageId}`).then((res) => {
-      return res.data;
-    }).catch((err) => {
-      throw err;
-    });
+    return axios
+      .delete(`/messages/${messageId}`)
+      .then((res) => {
+        return res.data;
+      })
+      .catch((err) => {
+        throw err;
+      });
   }
 
   async createRoomData({ friendName }) {
@@ -53,9 +55,14 @@ export class MessageService {
   }
 
   async getRoomData({ friendName }) {
-    return axios.get(`/rooms/${friendName}`).then((res) => {
-      return res.data;
-    });
+    return axios
+      .get(`/rooms/${friendName}`)
+      .then((res) => {
+        return res.data;
+      })
+      .catch((err) => {
+        throw err;
+      });
   }
 
   async updateIsPresent({ friendName, isPresent }) {

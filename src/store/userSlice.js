@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  id: null,
+  _id: null,
   userName: "",
   activeFriendIds: [],
   contactFriendIds: [],
@@ -15,7 +15,7 @@ const userSlice = createSlice({
   initialState,
   reducers: {
     setUserProfileData: (state, action) => {
-      state.id = action.payload._id;
+      state._id = action.payload._id;
       state.userName = action.payload.userName;
       state.activeFriendIds = action.payload.activeFriendIds;
       state.contactFriendIds = action.payload.contactFriendIds;
@@ -24,7 +24,7 @@ const userSlice = createSlice({
       state.lastSeen = action.payload.lastSeen;
     },
     resetToDefault: (state) => {
-      state.id = null;
+      state._id = null;
       state.userName = "";
       state.activeFriendIds = [];
       state.contactFriendIds = [];

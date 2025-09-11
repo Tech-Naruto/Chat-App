@@ -7,8 +7,10 @@
 }
 
 @utility scrollbar-medium {
+  &::-webkit-scrollbar{
+    width: 4px;
+  }
   &::-webkit-scrollbar-track {
-    display: hidden;
     background: #85f1f1;
   }
   &::-webkit-scrollbar-thumb {

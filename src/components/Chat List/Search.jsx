@@ -11,7 +11,7 @@ function Search({ type, allData = [] }) {
   const [searchText, setSearchText] = useState("");
   const [allSearchResultReceived, setAllSearchResultReceived] = useState(false);
   const dispatch = useDispatch();
-  const currentUserId = useSelector((state) => state.user.id);
+  const currentUserId = useSelector((state) => state.user._id);
   const currentUserName = useSelector((state) => state.user.userName);
   const searchRef = useRef(null);
   const searchResultRef = useRef(null);
@@ -48,16 +48,13 @@ function Search({ type, allData = [] }) {
 
   const onChange = (data) => {
     setSearchText(data.search);
-    if (data.search === "") {
-      setSearchResult([]);
-      setAllSearchResultReceived(false);
-      setSearchPage(1);
-      return;
-    }
-    data.search = data.search.trim();
     setAllSearchResultReceived(false);
     setSearchResult([]);
     setSearchPage(1);
+    if (data.search === "") {
+      return;
+    }
+    data.search = data.search.trim();
     try {
       if (type === "newFriendSearch") {
         search(data);
@@ -80,7 +77,7 @@ function Search({ type, allData = [] }) {
   };
 
   return (
-    <div className="relative z-20" ref={searchRef}>
+    <div className="relative z-20 h-full flex flex-col" ref={searchRef}>
       <div
         className={`flex space-x-2 items-center py-2 px-3 rounded-full group duration-100 ${
           focus ? "bg-transparent outline outline-cyan-500" : "bg-gray-500"
@@ -107,15 +104,16 @@ function Search({ type, allData = [] }) {
           onChange={(e) => onChange({ search: e.target.value })}
         />
       </div>
-      {focus && (
-        <div
-          className={`rounded-lg shadow-lg shadow-gray-900 absolute top-12 w-full flex flex-col max-h-50 overflow-y-scroll ${
-            type === "activeFriendSearch" ? "bg-gray-900" : ""
+      {focus && searchResult.length !== 0 && (
+        <ul
+          className={`rounded-lg shadow-lg shadow-gray-900 w-full flex flex-col overflow-y-auto scrollbar-medium ${
+            type === "activeFriendSearch" ? "bg-gray-900 absolute top-12 max-h-50" : "flex-1 mt-2"
           }`}
           ref={searchResultRef}
         >
           {searchResult.map((user) => (
             <ChatListContainer
+              key={user._id}
               roomId={[currentUserId, user._id].sort().join("_")}
               friendName={user.userName}
               profilePic={user.profilePic || defaultProfilePic}
@@ -127,7 +125,7 @@ function Search({ type, allData = [] }) {
               type="search"
             ></ChatListContainer>
           ))}
-        </div>
+        </ul>
       )}
     </div>
   );

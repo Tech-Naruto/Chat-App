@@ -24,7 +24,7 @@ import { set } from "react-hook-form";
 function ChatList() {
   const activeFriendIds = useSelector((state) => state.user.activeFriendIds);
   const contactFriendIds = useSelector((state) => state.user.contactFriendIds);
-  const userId = useSelector((state) => state.user.id);
+  const userId = useSelector((state) => state.user._id);
   const [contactFriendData, setContactFriendData] = useState([]);
   const [activeFriendData, setActiveFriendData] = useState([]);
   const activeFriendDataRef = useRef(activeFriendData);

@@ -13,7 +13,7 @@ import useClickOutside from "../../hooks/useClickOutside";
 
 function Account({ profilePicUrl = defaultProfilePic }) {
   const activeRoomId = useSelector((state) => state.chat.roomId);
-  const userId = useSelector((state) => state.auth.userData.$id);
+  const userId = useSelector((state) => state.auth.userData._id);
   const [showAccountPanel, setShowAccountPanel] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();

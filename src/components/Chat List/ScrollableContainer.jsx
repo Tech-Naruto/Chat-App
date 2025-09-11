@@ -127,7 +127,8 @@ function ScrollableContainer({
         setIsPresent(roomData.isPresent);
         setFriendLastSeenAt(friendLastSeen);
       } catch (err) {
-        console.log(err);
+        setIsPresent(false);
+        setFriendLastSeenAt(null);
       }
     };
     getPreviousMessages();
@@ -191,11 +192,13 @@ function ScrollableContainer({
 
   return (
     <div
-      className="w-full h-90 px-4 place-content-end grow overflow-y-scroll scrollbar-medium"
+      className="w-full h-90 px-4 place-content-end grow overflow-y-auto scrollbar-medium"
       ref={containerRef}
     >
       {messages &&
         messages.map((message, index) => {
+          console.log("message sender Id :", message.senderId);
+          console.log("user Id :", userId);
           const now = new Date();
           let currentDate = new Date(message.updatedAt).toLocaleDateString(
             "en-IN",

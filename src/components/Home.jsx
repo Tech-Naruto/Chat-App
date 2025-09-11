@@ -9,7 +9,7 @@ function Home() {
     <Container className="h-full">
       {userStatus ? (
         <Container className="flex h-full">
-          <div className="w-1/4 bg-gray-800 min-w-70 rounded-t-xl">
+          <div className="w-1/4 h-full bg-gray-800 min-w-70 rounded-t-xl">
             <ChatList />
           </div>
           <div className="w-3/4 bg-[#077dc1] rounded-t-xl overflow-hidden">
