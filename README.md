@@ -4,7 +4,7 @@ A minimal, emotionally resonant chat interface built with precision and purpose.
 
 [🔗 Live Demo](https://chat-app-delta-henna-92.vercel.app)
 
-[Click to watch](https://tech-naruto.github.io/User-Attachments/)
+[🎥 Watch the Demo](https://tech-naruto.github.io/Chat-App-Demo-Video/)
 
 ## 🧩 Overview
 
