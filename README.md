@@ -1,6 +1,6 @@
 # Chat App Frontend
 
-A minimal, emotionally resonant chat interface built with precision and purpose. Designed for real-time reliability, pixel-perfect UI, and seamless cross-device performance.
+A minimal, emotionally resonant chat interface built with precision and purpose. Engineered for real-time reliability and pixel-perfect UI—currently optimized for laptops, with cross-device enhancements underway.
 
 [🔗 Live Demo](https://chat-app-delta-henna-92.vercel.app)
 
