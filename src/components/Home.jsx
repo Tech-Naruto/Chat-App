@@ -12,7 +12,7 @@ function Home() {
           <div className="w-1/4 h-full bg-gray-800 min-w-70 rounded-t-xl">
             <ChatList />
           </div>
-          <div className="w-3/4 bg-[#077dc1] rounded-t-xl overflow-hidden">
+          <div className="w-3/4 bg-gradient-to-br from-[#2F66CC] via-[#3AA7C2] to-[#18D9D2]  rounded-t-xl overflow-hidden">
             {roomId ? (
               <Chat />
             ) : (

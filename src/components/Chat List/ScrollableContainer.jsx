@@ -192,13 +192,11 @@ function ScrollableContainer({
 
   return (
     <div
-      className="w-full h-90 px-4 place-content-end grow overflow-y-auto scrollbar-medium"
+      className="w-full h-90 px-4 pt-17 place-content-end grow overflow-y-auto scrollbar-medium"
       ref={containerRef}
     >
       {messages &&
         messages.map((message, index) => {
-          console.log("message sender Id :", message.senderId);
-          console.log("user Id :", userId);
           const now = new Date();
           let currentDate = new Date(message.updatedAt).toLocaleDateString(
             "en-IN",

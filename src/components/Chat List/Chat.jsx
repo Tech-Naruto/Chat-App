@@ -155,7 +155,7 @@ function Chat() {
       className="flex flex-col h-full relative"
       onKeyDown={showEmoji ? handleEnterKey : null}
     >
-      <div className="w-full flex bg-gray-700 items-center space-x-5 p-2">
+      <div className="w-full flex bg-black/20 backdrop-blur-xl z-50 items-center space-x-5 p-2 absolute top-0">
         <img
           src={friendProfilePic}
           alt="Profile Pic"
